@@ -1,0 +1,5 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path d="M50 1 L95 25 L95 75 L50 99 L5 75 L5 25 Z" stroke="#3cb371" fill="transparent" stroke-width="4" />
+    <text x="50" y="50" font-size="40" text-anchor="middle" dominant-baseline="central" fill="#3cb371">ECS</text>
+
+</svg>

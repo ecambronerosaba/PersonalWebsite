@@ -1,17 +1,24 @@
 import React from "react";
+import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import "./CSS/Contact.css";
 
-const ContactPage = () => {
+function Contact() {
   return (
-    <div>
-      <h1>Get in touch!</h1>
-      <p>Here's where you can contact me:</p>
-      <ul>
-        <li>Email: esteban.cambronerosaba - at - gmail.com</li>
-        <li>Phone: (123) 456-7890</li>
-        <li>Address: 1234 Example St, City, State Zip</li>
-      </ul>
+    <div className="contact-container">
+      <h1>Contact Me!</h1>
+      <div className="contact-icons">
+        <a href="mailto:esteban.cambronerosaba@gmail.com">
+          <FaEnvelope className="icon" />
+        </a>
+        <a href="https://www.linkedin.com/in/estebancambronero/">
+          <FaLinkedin className="icon" />
+        </a>
+        <a href="https://github.com/ecambronerosaba">
+          <FaGithub className="icon" />
+        </a>
+      </div>
     </div>
   );
-};
+}
 
-export default ContactPage;
+export default Contact;

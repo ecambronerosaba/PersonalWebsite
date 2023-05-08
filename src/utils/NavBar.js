@@ -15,7 +15,6 @@ function Navbar() {
       <ol className="navbar-links" type="1">
         <NavbarLink to="/about">About</NavbarLink>
         <NavbarLink to="/experience">Experience</NavbarLink>
-        <NavbarLink to="/work">Work</NavbarLink>
         <NavbarLink to="/contact">Contact</NavbarLink>
         <li>
           <Link to="/resume.pdf" className="resume-button draw-border">

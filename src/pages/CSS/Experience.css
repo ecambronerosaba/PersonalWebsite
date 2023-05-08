@@ -50,6 +50,14 @@
   h3 {
     font-size: 1rem;
     font-weight: 500;
-    color: #ccc;
+    color: #6e6e6e;
+  }
+
+  .panel-content ul li::marker {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f054\0020";
+    size: xs;
+    color: #3cb371
   }
   

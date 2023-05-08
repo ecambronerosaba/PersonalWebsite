@@ -6,7 +6,7 @@ import "./CSS/Experience.css";
 const ExperiencePage = () => {
   return (
     <div className="App">
-      <h1>Experiences:</h1>
+      <h1>Previous work experience:</h1>
       <Tabs>
         <TabList>
           <Tab>
@@ -23,7 +23,7 @@ const ExperiencePage = () => {
           </Tab>
         </TabList>
 
-        <TabPanel>
+        <TabPanel className="list">
           <div className="panel-content">
             <h2>Software Engineer @ Netflix</h2>
             <h3>August 2023 - Present</h3>

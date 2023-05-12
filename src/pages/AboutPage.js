@@ -97,7 +97,7 @@ function AboutPage() {
             <div className="collage-container">
               <img
                 src="https://images.unsplash.com/photo-1517088455889-bfa75135412c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e5548929376f93d8b1b7a21097df03bd&auto=format&fit=crop&w=749&q=80"
-                alt="image"
+                alt="placeholder image"
               />
             </div>
           </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import Slider from "react-slick";
-import { ReactPhotoCollage } from "react-photo-collage";
 
 import "./CSS/About.css";
 import "slick-carousel/slick/slick.css";

@@ -7,11 +7,9 @@ import logo from "./logo.svg";
 function Navbar() {
   return (
     <nav className="navbar">
-      <div className="logo">
-        <Link to="/">
-          <img src={logo} alt="Logo" />
-        </Link>
-      </div>
+      <Link to="/">
+        <div className="logo" />
+      </Link>
       <ol className="navbar-links" type="1">
         <NavbarLink to="/about">About</NavbarLink>
         <NavbarLink to="/experience">Experience</NavbarLink>

@@ -28,9 +28,6 @@ function HomePage() {
       {showSecondAnimation && (
         <TypeAnimation
           sequence={[
-            // Same String at the start will only be typed once, initially
-            "I'm a ",
-            1000,
             "I'm a creator",
             1000,
             "I'm a developer",

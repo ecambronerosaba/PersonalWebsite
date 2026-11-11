@@ -552,6 +552,8 @@
   // ---------- Actions ----------
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    ["role", "tagline"].forEach(function (id) { $(id).value = $(id).value.trim(); });
+    updateCounter();
     if (!form.reportValidity()) {
       setStatus("Role/title and tagline are required.", true);
       return;

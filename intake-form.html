@@ -456,7 +456,7 @@
       if (line.trim() === "") { blanks++; return; }
       var pendingBlanks = blanks;
       blanks = 0;
-      var heading = line.match(/^\s*(#{1,6})\s+(.*?)\s*#*\s*$/);
+      var heading = line.match(/^(#{1,6})\s+(.*?)\s*#*\s*$/);
       if (heading) {
         last = null;
         var h = heading[2];

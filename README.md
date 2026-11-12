@@ -1,3 +1,15 @@
+# Personal Website
+
+## Design brief intake form
+
+[`intake-form.html`](intake-form.html) is a standalone, single-file form for the "Identity & Content" section of the site's design brief. It has no build step, backend, or external dependencies.
+
+- **Open it:** double-click the file (or `open intake-form.html` / `xdg-open intake-form.html`), or serve the repo statically, e.g. `npx serve .` or `python3 -m http.server`, and visit `/intake-form.html`.
+- **Export:** fill in the form (only role/title and tagline are required) and click **Export answers**. A Markdown block is copied to your clipboard and also shown in a textarea in case clipboard access is blocked.
+- **Load:** click **Load from Markdown**, paste a previously exported block, and click **Load into form** to repopulate every field, including all projects. Hand-edited exports load too, as long as the `- **Label:** value` lines and `#### Project N` headings are kept.
+
+The file sits at the repo root rather than in `public/`, so it is not deployed with the React site.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

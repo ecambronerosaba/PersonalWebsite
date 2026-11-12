@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal Website Brief — Identity &amp; Content</title>
+<style>
+  :root {
+    --fg: #1f2328;
+    --muted: #656d76;
+    --border: #d0d7de;
+    --bg: #ffffff;
+    --surface: #f6f8fa;
+    --accent: #0969da;
+    --accent-fg: #ffffff;
+    --danger: #cf222e;
+    --radius: 8px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg: #e6edf3;
+      --muted: #8d96a0;
+      --border: #30363d;
+      --bg: #0d1117;
+      --surface: #161b22;
+      --accent: #4493f8;
+      --accent-fg: #0d1117;
+      --danger: #f85149;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--fg);
+    background: var(--bg);
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 20px 96px; }
+  h1 { font-size: 1.75rem; margin: 0 0 8px; }
+  h2 { font-size: 1.15rem; margin: 0 0 4px; }
+  p.lead { color: var(--muted); margin: 0 0 40px; }
+  fieldset, .field { border: 0; margin: 0 0 32px; padding: 0; }
+  legend, label.title { display: block; font-weight: 600; margin-bottom: 6px; padding: 0; }
+  .hint { color: var(--muted); font-size: 0.9rem; margin: -2px 0 10px; }
+  .req { color: var(--danger); margin-left: 2px; }
+  input[type=text], input[type=url], textarea {
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+  }
+  textarea { resize: vertical; min-height: 80px; }
+  input:focus, textarea:focus, button:focus-visible, .switch input:focus-visible + .track {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  input.inactive { opacity: 0.6; }
+  .counter { text-align: right; font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+  .counter.over { color: var(--danger); font-weight: 600; }
+  .options { display: grid; gap: 8px; }
+  .options label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+  .options input[type=radio] { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); }
+  .other-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .other-row input[type=text] { flex: 1 1 200px; width: auto; }
+  .project {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .project-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .project-head h3 { margin: 0; font-size: 1rem; }
+  .project .sub { margin-bottom: 14px; }
+  .project .sub:last-child { margin-bottom: 0; }
+  .project .sub label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+  .project textarea { min-height: 64px; }
+  button {
+    font: inherit;
+    cursor: pointer;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: inherit;
+    padding: 9px 16px;
+  }
+  button:hover:not(:disabled) { border-color: var(--muted); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); font-weight: 600; }
+  button.link { background: none; border: 0; padding: 4px 6px; color: var(--danger); font-size: 0.9rem; }
+  .switch { display: inline-flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+  .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .switch .track {
+    position: relative; width: 44px; height: 24px; border-radius: 999px;
+    background: var(--border); transition: background 0.15s;
+  }
+  .switch .track::after {
+    content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px;
+    border-radius: 50%; background: #fff; transition: transform 0.15s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .switch input:checked + .track { background: var(--accent); }
+  .switch input:checked + .track::after { transform: translateX(20px); }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+  .status { font-size: 0.9rem; color: var(--muted); }
+  .status.error { color: var(--danger); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 48px 0; }
+  .panel textarea { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.85rem; min-height: 220px; }
+  .panel { margin-top: 24px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 480px) {
+    main { padding-top: 32px; }
+    .actions button { flex: 1 1 auto; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Personal Website Brief</h1>
+  <p class="lead">Identity &amp; Content. Only role/title and tagline are required. When you're done, export your answers as Markdown.</p>
+
+  <form id="brief" novalidate>
+    <div class="field">
+      <label class="title" for="role">Current role / title<span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="role" name="role" required autocomplete="organization-title" placeholder="e.g. Senior Software Engineer at Acme">
+    </div>
+
+    <div class="field">
+      <label class="title" for="tagline">Tagline<span class="req" aria-hidden="true">*</span></label>
+      <p class="hint" id="tagline-hint">The one sentence a visitor should remember. Aim for 140 characters or fewer.</p>
+      <input type="text" id="tagline" name="tagline" required aria-describedby="tagline-hint tagline-counter" placeholder="e.g. I build fast, friendly tools for developers.">
+      <div class="counter" id="tagline-counter" aria-live="polite">0 / 140</div>
+    </div>
+
+    <fieldset>
+      <legend>Top projects / accomplishments</legend>
+      <p class="hint">Add 1 to 5. Every field is optional.</p>
+      <div id="projects"></div>
+      <button type="button" id="add-project">+ Add another</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Goal of the site</legend>
+      <div class="options" id="goal-options">
+        <label><input type="radio" name="goal" value="job-hunting"> Job hunting</label>
+        <label><input type="radio" name="goal" value="reputation"> Building reputation</label>
+        <label><input type="radio" name="goal" value="freelancing"> Freelancing</label>
+        <label><input type="radio" name="goal" value="home-base"> Home base</label>
+        <div class="other-row">
+          <label><input type="radio" name="goal" value="other"> Other:</label>
+          <input type="text" id="goal-other" aria-label="Other goal" placeholder="Describe the goal">
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label class="title" for="resume">Resume or LinkedIn URL</label>
+      <input type="url" id="resume" name="resume" placeholder="https://www.linkedin.com/in/you">
+    </div>
+
+    <fieldset>
+      <legend>Blog / writing</legend>
+      <div class="options">
+        <label><input type="radio" name="blog" value="now"> Now</label>
+        <label><input type="radio" name="blog" value="later"> Later</label>
+        <label><input type="radio" name="blog" value="no"> No</label>
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <span class="title" style="display:block;font-weight:600;margin-bottom:6px" id="gallery-label">Keep a photo gallery page</span>
+      <label class="switch">
+        <input type="checkbox" id="gallery" role="switch" aria-labelledby="gallery-label">
+        <span class="track" aria-hidden="true"></span>
+        <span id="gallery-text">No</span>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="primary" id="export">Export answers</button>
+      <button type="button" id="toggle-load">Load from Markdown</button>
+      <span class="status" id="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="panel" id="export-panel" hidden>
+      <label class="title" for="export-output">Exported Markdown</label>
+      <p class="hint">Copied to your clipboard if your browser allowed it. Otherwise, select and copy the text below.</p>
+      <textarea id="export-output" readonly></textarea>
+    </div>
+
+    <div class="panel" id="load-panel" hidden>
+      <label class="title" for="load-input">Paste a previously exported Markdown block</label>
+      <textarea id="load-input" placeholder="## Identity &amp; Content&#10;…"></textarea>
+      <div class="actions">
+        <button type="button" class="primary" id="load">Load into form</button>
+        <button type="button" id="cancel-load">Cancel</button>
+      </div>
+    </div>
+  </form>
+</main>
+
+<template id="project-template">
+  <div class="project">
+    <div class="project-head">
+      <h3>Project <span class="num"></span></h3>
+      <button type="button" class="link remove">Remove</button>
+    </div>
+    <div class="sub">
+      <label>Name</label>
+      <input type="text" data-key="name" placeholder="e.g. PuckPal">
+    </div>
+    <div class="sub">
+      <label>Description</label>
+      <textarea data-key="description" placeholder="What it is and what you did"></textarea>
+    </div>
+    <div class="sub">
+      <label>Link / repo</label>
+      <input type="url" data-key="link" placeholder="https://github.com/you/project">
+    </div>
+    <div class="sub">
+      <label>Metrics / impact</label>
+      <textarea data-key="impact" placeholder="e.g. 2k monthly users, cut build time 40%"></textarea>
+    </div>
+  </div>
+</template>
+
+<script>
+(function () {
+  "use strict";
+
+  var TAGLINE_LIMIT = 140;
+  var MIN_PROJECTS = 1;
+  var MAX_PROJECTS = 5;
+  var BLANK = "_Not answered_";
+  var PROJECT_FIELDS = [
+    { key: "name", label: "Name" },
+    { key: "description", label: "Description" },
+    { key: "link", label: "Link" },
+    { key: "impact", label: "Impact" }
+  ];
+  var GOALS = {
+    "job-hunting": "Job hunting",
+    "reputation": "Building reputation",
+    "freelancing": "Freelancing",
+    "home-base": "Home base",
+    "other": "Other"
+  };
+  var BLOG = { now: "Now", later: "Later", no: "No" };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $("brief");
+  var projectsEl = $("projects");
+  var addBtn = $("add-project");
+  var tmpl = $("project-template");
+  var statusEl = $("status");
+  var uid = 0;
+
+  // ---------- Projects ----------
+  function addProject(data) {
+    if (projectsEl.children.length >= MAX_PROJECTS) return null;
+    var node = tmpl.content.firstElementChild.cloneNode(true);
+    uid += 1;
+    node.querySelectorAll("[data-key]").forEach(function (input) {
+      var id = "project-" + uid + "-" + input.dataset.key;
+      input.id = id;
+      input.previousElementSibling.htmlFor = id;
+      if (data && data[input.dataset.key]) input.value = data[input.dataset.key];
+    });
+    node.querySelector(".remove").addEventListener("click", function () {
+      if (projectsEl.children.length <= MIN_PROJECTS) return;
+      node.remove();
+      refreshProjects();
+    });
+    projectsEl.appendChild(node);
+    refreshProjects();
+    return node;
+  }
+
+  function refreshProjects() {
+    var items = projectsEl.children;
+    for (var i = 0; i < items.length; i++) {
+      items[i].querySelector(".num").textContent = i + 1;
+      items[i].querySelector(".remove").hidden = items.length <= MIN_PROJECTS;
+    }
+    addBtn.disabled = items.length >= MAX_PROJECTS;
+    addBtn.textContent = items.length >= MAX_PROJECTS ? "Maximum of " + MAX_PROJECTS + " reached" : "+ Add another";
+  }
+
+  function getProjects() {
+    return Array.prototype.map.call(projectsEl.children, function (node) {
+      var p = {};
+      node.querySelectorAll("[data-key]").forEach(function (input) {
+        p[input.dataset.key] = input.value.trim();
+      });
+      return p;
+    });
+  }
+
+  addBtn.addEventListener("click", function () {
+    var node = addProject();
+    if (node) node.querySelector("input").focus();
+  });
+
+  // ---------- Tagline counter ----------
+  var tagline = $("tagline");
+  var counter = $("tagline-counter");
+  function updateCounter() {
+    var n = tagline.value.length;
+    counter.textContent = n + " / " + TAGLINE_LIMIT;
+    counter.classList.toggle("over", n > TAGLINE_LIMIT);
+  }
+  tagline.addEventListener("input", updateCounter);
+
+  // ---------- Goal "other" ----------
+  var goalOther = $("goal-other");
+  var goalOtherRadio = form.querySelector('input[name=goal][value=other]');
+  function syncGoalOther() {
+    goalOther.classList.toggle("inactive", !goalOtherRadio.checked);
+  }
+  form.querySelectorAll("input[name=goal]").forEach(function (r) {
+    r.addEventListener("change", function () {
+      syncGoalOther();
+      if (r === goalOtherRadio) goalOther.focus();
+    });
+  });
+  // Typing in (or focusing) the text box selects "Other".
+  goalOther.addEventListener("focus", function () {
+    goalOtherRadio.checked = true;
+    syncGoalOther();
+  });
+
+  // ---------- Gallery switch ----------
+  var gallery = $("gallery");
+  function syncGallery() { $("gallery-text").textContent = gallery.checked ? "Yes" : "No"; }
+  gallery.addEventListener("change", syncGallery);
+
+  // ---------- Status ----------
+  function setStatus(msg, isError) {
+    statusEl.textContent = msg;
+    statusEl.classList.toggle("error", !!isError);
+  }
+
+  // ---------- Collect / apply ----------
+  function radioValue(name) {
+    var r = form.querySelector('input[name="' + name + '"]:checked');
+    return r ? r.value : "";
+  }
+  function setRadio(name, value) {
+    form.querySelectorAll('input[name="' + name + '"]').forEach(function (r) {
+      r.checked = r.value === value;
+    });
+  }
+
+  function collect() {
+    return {
+      role: $("role").value.trim(),
+      tagline: tagline.value.trim(),
+      projects: getProjects(),
+      goal: radioValue("goal"),
+      goalOther: goalOther.value.trim(),
+      resume: $("resume").value.trim(),
+      blog: radioValue("blog"),
+      gallery: gallery.checked
+    };
+  }
+
+  function apply(d) {
+    $("role").value = d.role || "";
+    tagline.value = d.tagline || "";
+    projectsEl.innerHTML = "";
+    var projects = (d.projects || []).slice(0, MAX_PROJECTS);
+    if (!projects.length) projects = [{}];
+    projects.forEach(function (p) { addProject(p); });
+    setRadio("goal", d.goal || "");
+    goalOther.value = d.goalOther || "";
+    $("resume").value = d.resume || "";
+    setRadio("blog", d.blog || "");
+    gallery.checked = !!d.gallery;
+    updateCounter();
+    syncGoalOther();
+    syncGallery();
+  }
+
+  // ---------- Markdown export ----------
+  function mdValue(v) {
+    if (!v) return BLANK;
+    // Continuation lines are indented so multi-line answers stay inside their list item.
+    return v.replace(/\r\n?/g, "\n").split("\n").map(function (line, i) {
+      return i === 0 || line === "" ? line : "  " + line;
+    }).join("\n");
+  }
+
+  function toMarkdown(d) {
+    var goal = BLANK;
+    if (d.goal === "other") goal = d.goalOther ? "Other: " + d.goalOther : "Other";
+    else if (d.goal) goal = GOALS[d.goal];
+
+    var lines = [
+      "## Identity & Content",
+      "",
+      "- **Role / title:** " + mdValue(d.role),
+      "- **Tagline:** " + mdValue(d.tagline),
+      "- **Goal of the site:** " + goal,
+      "- **Resume / LinkedIn:** " + mdValue(d.resume),
+      "- **Blog / writing:** " + (BLOG[d.blog] || BLANK),
+      "- **Photo gallery page:** " + (d.gallery ? "Yes" : "No"),
+      "",
+      "### Top projects"
+    ];
+    d.projects.forEach(function (p, i) {
+      lines.push("", "#### Project " + (i + 1));
+      PROJECT_FIELDS.forEach(function (f) {
+        lines.push("- **" + f.label + ":** " + mdValue(p[f.key]));
+      });
+    });
+    return lines.join("\n") + "\n";
+  }
+
+  // ---------- Markdown import ----------
+  function normKey(k) { return k.toLowerCase().replace(/[^a-z]/g, ""); }
+  var TOP_KEYS = {
+    roletitle: "role", role: "role", title: "role",
+    tagline: "tagline",
+    goalofthesite: "goal", goal: "goal",
+    resumelinkedin: "resume", resume: "resume", linkedin: "resume",
+    blogwriting: "blog", blog: "blog",
+    photogallerypage: "gallery", photogallery: "gallery", gallery: "gallery"
+  };
+  var PROJECT_KEYS = {
+    name: "name", description: "description",
+    link: "link", linkrepo: "link", repo: "link",
+    impact: "impact", metricsimpact: "impact", metrics: "impact"
+  };
+
+  function clean(v) {
+    v = v.replace(/\s+$/, "");
+    return v.trim() === BLANK ? "" : v;
+  }
+
+  function parseMarkdown(text) {
+    var lines = text.replace(/\r\n?/g, "\n").split("\n");
+    var top = {};
+    var projects = [];
+    var current = null;   // current project object, or null for top-level
+    var last = null;      // { obj, key } of the item receiving continuation lines
+    var inProjects = false;
+    var found = 0;
+    var blanks = 0;       // blank lines seen since the last continuation-eligible line
+
+    lines.forEach(function (line) {
+      if (line.trim() === "") { blanks++; return; }
+      var pendingBlanks = blanks;
+      blanks = 0;
+      var heading = line.match(/^(#{1,6})\s+(.*?)\s*#*\s*$/);
+      if (heading) {
+        last = null;
+        var h = heading[2];
+        if (/project/i.test(h) && heading[1].length >= 4) {
+          current = {};
+          projects.push(current);
+          inProjects = true;
+        } else if (/projects|accomplishments/i.test(h)) {
+          inProjects = true;
+          current = null;
+        } else {
+          inProjects = false;
+          current = null;
+        }
+        return;
+      }
+      var item = line.match(/^[-*+]\s+\*\*(.+?):?\*\*:?\s?(.*)$/);
+      if (item) {
+        var k = normKey(item[1]);
+        var target = null, key = null;
+        if (inProjects && PROJECT_KEYS[k]) {
+          if (!current) { current = {}; projects.push(current); }
+          target = current; key = PROJECT_KEYS[k];
+        } else if (TOP_KEYS[k]) {
+          target = top; key = TOP_KEYS[k];
+        }
+        if (target) {
+          target[key] = item[2];
+          last = { obj: target, key: key };
+          found++;
+        } else {
+          last = null;
+        }
+        return;
+      }
+      if (last && /^\s{2,}\S/.test(line)) {
+        last.obj[last.key] += "\n".repeat(pendingBlanks + 1) + line.replace(/^\s{2}/, "");
+        return;
+      }
+      last = null;
+    });
+
+    if (!found) return null;
+
+    Object.keys(top).forEach(function (k) { top[k] = clean(top[k]); });
+    projects.forEach(function (p) {
+      Object.keys(p).forEach(function (k) { p[k] = clean(p[k]); });
+    });
+
+    var d = {
+      role: top.role || "",
+      tagline: top.tagline || "",
+      resume: top.resume || "",
+      projects: projects,
+      goal: "", goalOther: "", blog: "", gallery: false
+    };
+
+    var g = (top.goal || "").trim();
+    var otherMatch = g.match(/^other\s*(?:[:\u2014\u2013-]\s*(.*))?$/i);
+    if (otherMatch) {
+      d.goal = "other";
+      d.goalOther = (otherMatch[1] || "").trim();
+    } else if (g) {
+      var gk = normKey(g);
+      Object.keys(GOALS).forEach(function (val) {
+        if (normKey(GOALS[val]) === gk) d.goal = val;
+      });
+      if (!d.goal) { d.goal = "other"; d.goalOther = g; }
+    }
+
+    var b = normKey(top.blog || "");
+    if (BLOG[b]) d.blog = b;
+
+    d.gallery = /^(yes|y|true|on)$/i.test((top.gallery || "").trim());
+    return d;
+  }
+
+  // ---------- Clipboard ----------
+  function copyText(text, fallbackEl) {
+    function legacy() {
+      fallbackEl.focus();
+      fallbackEl.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      return ok;
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return legacy(); });
+    }
+    return Promise.resolve(legacy());
+  }
+
+  // ---------- Actions ----------
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    ["role", "tagline"].forEach(function (id) { $(id).value = $(id).value.trim(); });
+    updateCounter();
+    if (!form.reportValidity()) {
+      setStatus("Role/title and tagline are required.", true);
+      return;
+    }
+    var md = toMarkdown(collect());
+    var out = $("export-output");
+    out.value = md;
+    $("export-panel").hidden = false;
+    $("load-panel").hidden = true;
+    copyText(md, out).then(function (ok) {
+      setStatus(ok ? "Markdown copied to clipboard." : "Couldn't access the clipboard. Copy the Markdown below.", !ok);
+    });
+  });
+
+  $("toggle-load").addEventListener("click", function () {
+    var panel = $("load-panel");
+    panel.hidden = !panel.hidden;
+    if (!panel.hidden) {
+      $("export-panel").hidden = true;
+      $("load-input").focus();
+    }
+  });
+  $("cancel-load").addEventListener("click", function () {
+    $("load-panel").hidden = true;
+    $("load-input").value = "";
+  });
+  $("load").addEventListener("click", function () {
+    var d = parseMarkdown($("load-input").value);
+    if (!d) {
+      setStatus("No answers found. Paste a block exported from this form.", true);
+      return;
+    }
+    apply(d);
+    $("load-panel").hidden = true;
+    $("load-input").value = "";
+    setStatus("Answers loaded.", false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // ---------- Init ----------
+  addProject();
+  updateCounter();
+  syncGoalOther();
+  syncGallery();
+
+  // Exposed for testing in the console.
+  window.intakeForm = { toMarkdown: toMarkdown, parseMarkdown: parseMarkdown, collect: collect, apply: apply };
+})();
+</script>
+</body>
+</html>

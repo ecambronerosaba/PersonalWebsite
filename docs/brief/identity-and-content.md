@@ -24,7 +24,7 @@ A community catalog of espresso shot profiles for the Fellow Espresso Series 1 (
 
 ### Ergonaut keyboard
 
-A wireless split keyboard that I 3D printed, assembled, and programmed myself. The firmware is a custom ZMK config: nice!nano v2 controllers, nice!view displays on both halves, layered keymaps with tuned hold-tap behavior, and firmware binaries built automatically by GitHub Actions.
+A wireless split keyboard that I 3D printed and programmed myself. The firmware is a custom ZMK config: nice!nano v2 controllers, nice!view displays on both halves, layered keymaps with tuned hold-tap behavior, and firmware binaries built automatically by GitHub Actions.
 
 - **Stack:** ZMK, Zephyr RTOS, Devicetree, GitHub Actions
 - **Links:** [GitHub](https://github.com/ecambronerosaba/zmk-config)

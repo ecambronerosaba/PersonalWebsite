@@ -374,7 +374,7 @@ const SCENES = [
    B.O(box(.08,.14,7.4,'#ff2a2a',{glow:1.6}),-.04,3.45,4,[0,0,0],9);
    [-.04,8.04].forEach(z=>B.O(box(5.6,.05,.04,'#e9e9e9'),9,1.66,z,[0,0,0],4));
    [4,14].forEach(x=>[-.06,8.06].forEach(z=>B.O(new THREE.Mesh(new THREE.TorusGeometry(1.55,.2,8,28,Math.PI), mat(K,{rough:.5})),x,1.3,z,[0,0,0],7)));
-   const port = new THREE.Group(); port.add(box(.7,.6,.08,C.dgrey)); const led=box(.2,.2,.1,'#ffffff',{glow:.3}); led.position.set(.18,.12,.02); port.add(led);
+   const port = new THREE.Group(); port.add(box(.7,.6,.08,C.dgrey)); const led=box(.2,.2,.1,'#ffffff',{glow:.3}); const ledOff=led.material, ledOn=new THREE.MeshStandardMaterial({color:'#3dff7a', emissive:'#3dff7a', roughness:.3}); led.position.set(.18,.12,.02); port.add(led);
    B.O(port,16.2,3.1,8.05,[0,0,0],9);
    [[4,0.45,-1],[14,0.45,-1],[4,7.55,1],[14,7.55,1]].forEach(([x,z,s])=>B.O(wheel(s),x,1.3,z,[0,0,0],2));
    const dog = makeDog(); B.O(dog, 19.4, 0, 12.6, [0,.55,0], 9); anim.dog = dog;
@@ -409,7 +409,7 @@ const SCENES = [
        const charging = ch.k===1;
        if(charging && ch.pct<100){ ch.pct=Math.min(100,ch.pct+dt*13); drawMeter(ch.pct); if(ch.pct>=100) setAct('Fully charged. Click the charger to unplug'); }
        meter.material.opacity += ((charging?1:0)-meter.material.opacity)*.12; meter.position.y = .15*Math.sin(t*2);
-       led.material = charging ? mat('#3dff7a',{glow: ch.pct>=100?2:1+Math.sin(t*4)}) : mat('#ffffff',{glow:.3});
+       led.material = charging ? ledOn : ledOff; ledOn.emissiveIntensity = ch.pct>=100 ? 2 : 1+Math.sin(t*4);
        anim.dog.userData.tail.rotation.x = (charging?.9:.6)*Math.sin(t*(charging?14:9)); anim.dog.userData.head.rotation.z = .12+.05*Math.sin(t*2);
        if(f) f.parts.armL.rotation.z = .55+.35*Math.sin(t*6); } };
  }},

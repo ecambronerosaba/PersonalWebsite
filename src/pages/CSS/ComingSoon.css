@@ -1,0 +1,9 @@
+.coming-soon {
+  max-width: 640px;
+  margin: 12vh auto 0;
+  padding: 0 1rem;
+}
+.coming-soon h1 { font-size: 3rem; font-weight: 400; margin: 0 0 1rem; }
+.coming-soon p { font-size: 1.2rem; line-height: 1.6; opacity: 0.85; }
+.coming-soon-tag { color: #f2cd37; }
+.coming-soon-back { color: white; display: inline-block; margin-top: 1.5rem; }

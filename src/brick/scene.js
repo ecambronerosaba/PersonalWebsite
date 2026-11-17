@@ -10,6 +10,13 @@ const $ = (id) => root.querySelector("#" + id);
 const winListeners = [];
 const winOn = (type, fn) => { window.addEventListener(type, fn); winListeners.push([type, fn]); };
 let disposed = false, raf = 0;
+// Shared cached geometries/materials may be disposed here too; three.js
+// re-uploads them on next use, so later scenes still render correctly.
+const disposeTree = (tree) => tree.traverse((o) => {
+  if (o.geometry) o.geometry.dispose();
+  const ms = Array.isArray(o.material) ? o.material : o.material ? [o.material] : [];
+  ms.forEach((m) => { if (m.map) m.map.dispose(); m.dispose(); });
+});
 
 
 const PL = 0.4;                       // plate height (stud pitch = 1)
@@ -864,7 +871,7 @@ function loop(){
   leaving = leaving.filter(L=>{
     let alive=false;
     L.pieces.forEach(p=>{ const k = THREE.MathUtils.clamp((now-L.t-p.ldelay)/.6,0,1); if(k<1) alive=true; p.obj.position.lerpVectors(p.lfrom,p.lto,k*k); });
-    if(!alive){ scene.remove(L.root); }
+    if(!alive){ scene.remove(L.root); disposeTree(L.root); }
     return alive;
   });
   if(phase==='build'){
@@ -901,11 +908,7 @@ return () => {
   winListeners.forEach(([type, fn]) => window.removeEventListener(type, fn));
   clearTimeout(lp);
   controls.dispose();
-  scene.traverse((o) => {
-    if (o.geometry) o.geometry.dispose();
-    const ms = Array.isArray(o.material) ? o.material : o.material ? [o.material] : [];
-    ms.forEach((m) => { if (m.map) m.map.dispose(); m.dispose(); });
-  });
+  disposeTree(scene);
   renderer.dispose();
   renderer.forceContextLoss();
   renderer.domElement.remove();
